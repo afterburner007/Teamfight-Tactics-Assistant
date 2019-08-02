@@ -10,7 +10,7 @@
 
 using namespace cv;
 
-#define SWITCHCNT  (4)
+#define SWITCHCNT  (1)
 
 
 
