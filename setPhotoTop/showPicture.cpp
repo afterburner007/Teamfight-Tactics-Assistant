@@ -1,7 +1,11 @@
 #include "showPicture.h"
 
 Mat img;
-//HWND hq;
+
+/************************************************************************
+* 显示装备合成图
+
+************************************************************************/
 void showPictureEquipment()
 {
 	img=imread("..\\photo.png");
@@ -10,6 +14,10 @@ void showPictureEquipment()
 	imshow("show", img);
 }
 
+/************************************************************************
+* 显示灵风作用图
+
+************************************************************************/
 void showPicturelingfeng()
 {
 	img = imread("..\\灵风.jpg");
@@ -19,5 +27,15 @@ void showPicturelingfeng()
 }
 
 
+/************************************************************************
+* 显示拳头图片并缩小
 
+************************************************************************/
+void showPicturefist()
+{
+	img = imread("..\\fist.jpg");
+	resize(img, img, Size(20, 20), 0, 0, INTER_LINEAR);
+	namedWindow("show", CV_WINDOW_AUTOSIZE);
+	imshow("show", img);
+}
 

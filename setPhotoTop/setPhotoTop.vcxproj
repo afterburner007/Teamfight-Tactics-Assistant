@@ -53,12 +53,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\setPhotoTop\opencv300\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Teamfight-Tactics-Assistant\opencv300\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\..\setPhotoTop\opencv300\build\x86\vc11\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\Teamfight-Tactics-Assistant\opencv300\build\x86\vc11\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>opencv_ts300.lib;opencv_ts300d.lib;opencv_world300.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

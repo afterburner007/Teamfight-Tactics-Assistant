@@ -17,8 +17,7 @@ using namespace cv;
 
 void showPictureEquipment();
 void showPicturelingfeng();
-void topTheWindow();
-void topTheWindowInit();
+void showPicturefist();
 
 
 

@@ -14,6 +14,11 @@ HHOOK keybordHook;
 HHOOK mouseHook;
 DWORD pCopy;
 WPARAM wParmCopy;
+
+/************************************************************************
+*键盘回调函数
+
+************************************************************************/
 LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
@@ -38,6 +43,7 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 			destroyWindow("show");
 			exit(1);
 		}
+		//获得键盘码
 		if (p->vkCode == 113 && wParam == WM_KEYDOWN)
 		{
 			pCopy = p->vkCode;
@@ -46,11 +52,20 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 		{
 			pCopy = p->vkCode;
 		}
+		else if (p->vkCode == 77 && wParam == WM_KEYDOWN)
+		{
+			pCopy = p->vkCode;
+		}
 	}
 
 	return CallNextHookEx(keybordHook, nCode, wParam, lParam);
 }
 
+
+/************************************************************************
+*鼠标回调函数
+
+************************************************************************/
 LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 {
 	LPMSLLHOOKSTRUCT p = (LPMSLLHOOKSTRUCT)lParam;
@@ -85,7 +100,10 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 	return CallNextHookEx(mouseHook, nCode, wParam, lParam);
 }
 
+/************************************************************************
+*全局键盘、鼠标监视
 
+************************************************************************/
 void  globalMonitoringKeyboardAndMouse()
 {
 	while (1)
@@ -105,6 +123,7 @@ void  globalMonitoringKeyboardAndMouse()
 int main(void)
 {
 	int numCnt=0;
+	int flagToHide=0;
 	//init
 	pCopy=0;
 	wParmCopy = 0;
@@ -124,12 +143,9 @@ int main(void)
 
 
 	showPictureEquipment();
-	//topTheWindowInit();
 
 	std::thread  monitor(globalMonitoringKeyboardAndMouse);
-	//std::thread  topTheWindows(topTheWindow);
 	monitor.detach();
-	//topTheWindows.detach();
 
 	HWND hq;
 
@@ -149,10 +165,17 @@ int main(void)
 		if (pCopy == 113)   //F2
 		{
 			showPicturelingfeng();
+			flagToHide = 0;
 		}
 		else if (pCopy == 114)  //F3
 		{
 			showPictureEquipment();
+			flagToHide = 0;
+		}
+		else if (pCopy==77)		//M
+		{
+			SetWindowPos(hq, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_FRAMECHANGED);
+			flagToHide = 1;
 		}
 		else
 		{
@@ -163,8 +186,12 @@ int main(void)
 		{
 			pCopy = 0;
 		}
-		waitKey(1000);
-		numCnt++;
+		waitKey(100);
+		if (flagToHide == 0)
+		{
+			numCnt++;
+		}
+
 	}
 
 
