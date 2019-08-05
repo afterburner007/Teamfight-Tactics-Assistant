@@ -11,13 +11,15 @@
 using namespace cv;
 
 #define SWITCHCNT  (1)
-
+#define SIZEH  (250)
+#define SIZEL  (250)
 
 
 
 void showPictureEquipment();
 void showPicturelingfeng();
 void showPicturefist();
+void showBadMan();
 
 
 

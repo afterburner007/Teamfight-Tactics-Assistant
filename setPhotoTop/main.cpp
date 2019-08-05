@@ -52,10 +52,15 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 		{
 			pCopy = p->vkCode;
 		}
+		else if (p->vkCode == 115 && wParam == WM_KEYDOWN)
+		{
+			pCopy = p->vkCode;
+		}
 		else if (p->vkCode == 77 && wParam == WM_KEYDOWN)
 		{
 			pCopy = p->vkCode;
 		}
+
 	}
 
 	return CallNextHookEx(keybordHook, nCode, wParam, lParam);
@@ -172,6 +177,11 @@ int main(void)
 			showPictureEquipment();
 			flagToHide = 0;
 		}
+		else if (pCopy == 115)  //F4
+		{
+			showBadMan();
+			flagToHide = 0;
+		}
 		else if (pCopy==77)		//M
 		{
 			SetWindowPos(hq, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_FRAMECHANGED);
@@ -179,7 +189,7 @@ int main(void)
 		}
 		else
 		{
-			SetWindowPos(hq, HWND_TOPMOST, 0, 0, 200, 200, SWP_NOACTIVATE | SWP_FRAMECHANGED);
+			SetWindowPos(hq, HWND_TOPMOST, 0, 0, SIZEH, SIZEH, SWP_NOACTIVATE | SWP_FRAMECHANGED);
 			numCnt = 0;
 		}
 		if (numCnt>SWITCHCNT)
