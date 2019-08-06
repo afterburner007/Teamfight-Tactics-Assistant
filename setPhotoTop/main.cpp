@@ -40,8 +40,8 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 		wsprintf(data, "按鍵目測為： %c  ", p->vkCode);
 		if (p->vkCode == 46 && wParam == WM_KEYDOWN)   //delete
 		{
-			destroyWindow("show");
-			exit(1);
+			pCopy = p->vkCode;
+			return 1;
 		}
 		//获得键盘码
 		if (p->vkCode == 113 && wParam == WM_KEYDOWN)
@@ -186,6 +186,11 @@ int main(void)
 		{
 			SetWindowPos(hq, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOACTIVATE | SWP_FRAMECHANGED);
 			flagToHide = 1;
+		}
+		else if (pCopy==46)
+		{
+			destroyWindow("show");
+			exit(1);
 		}
 		else
 		{
