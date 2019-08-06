@@ -139,12 +139,12 @@ int main(void)
 		NULL,                  // 当前实例句柄
 		NULL                  // 监听窗口句柄(NULL为全局监听)
 		);
-	mouseHook = SetWindowsHookEx(
-		WH_MOUSE_LL,      // 监听类型【鼠标】
-		MouseProc,        // 处理函数
-		NULL,                // 当前实例句柄
-		NULL              // 监听窗口句柄(NULL为全局监听)
-		);
+	//mouseHook = SetWindowsHookEx(
+	//	WH_MOUSE_LL,      // 监听类型【鼠标】
+	//	MouseProc,        // 处理函数
+	//	NULL,                // 当前实例句柄
+	//	NULL              // 监听窗口句柄(NULL为全局监听)
+	//	);
 
 
 	showPictureEquipment();
@@ -190,7 +190,8 @@ int main(void)
 		else if (pCopy==46)
 		{
 			destroyWindow("show");
-			exit(1);
+			UnhookWindowsHookEx(keybordHook);
+			return 0;
 		}
 		else
 		{
