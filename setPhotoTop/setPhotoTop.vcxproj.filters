@@ -29,6 +29,9 @@
     <Image Include="..\photo.jpg">
       <Filter>photo</Filter>
     </Image>
+    <Image Include="..\种族-职业.png">
+      <Filter>photo</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="showPicture.h">

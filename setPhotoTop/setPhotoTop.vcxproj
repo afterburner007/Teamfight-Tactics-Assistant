@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\photo.jpg" />
+    <Image Include="..\种族-职业.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="showPicture.h" />

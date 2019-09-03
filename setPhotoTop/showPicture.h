@@ -12,14 +12,18 @@ using namespace cv;
 
 #define SWITCHCNT  (1)
 #define SIZEH  (250)
-#define SIZEL  (250)
+#define SIZEW  (250)
+
 
 
 
 void showPictureEquipment();
 void showPicturelingfeng();
-void showPicturefist();
-void showBadMan();
+void showNewPlayOne();
+void showNewPlayTwo();
+void showChampionDropRates();
+int getThreadID(int pid);
+int getPID(char *target);
 
 
 
