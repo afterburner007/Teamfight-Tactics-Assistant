@@ -55,12 +55,14 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 	}
 	else if (wParam == 77)		//M
 	{
-		processHigth = 0.0F;
-		processWidth = 0.0F;
+		processHigth = 5.0F;
+		processWidth = 5.0F;
+		resizePicture();
 	}
 	else if (wParam == 46)
 	{
 		UnhookWindowsHookEx(keybordHook);			//卸载hook
+		UnhookWindowsHookEx(mouseHook);
 		exit(1);
 	}
 
@@ -84,10 +86,13 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 			processWidth += 10;
 			resizePicture();
 		}
-		else if (wheelData->mouseData == (-WHEEL_DELTA << 16))		//down   wheelData为unsinged char 转为int，即与-WHEEL_DELTA << 16)相等
+		else if (wheelData->mouseData == (-WHEEL_DELTA << 16))		//down   wheelData为unsinged char 转为int，即与(-WHEEL_DELTA << 16)相等
 		{
-			processHigth -= 10;
-			processWidth -= 10;
+			if (processWidth>10)
+			{
+				processHigth -= 10;
+				processWidth -= 10;
+			}
 			resizePicture();
 		}
 	}
@@ -132,7 +137,7 @@ int main(void)
 		threadId                  // 监听窗口句柄(NULL为全局监听)
 		);
 
-	keybordHook = SetWindowsHookEx(						//安装鼠标hook
+	mouseHook = SetWindowsHookEx(						//安装鼠标hook
 		WH_MOUSE,    
 		MouseProc,      
 		instance,                  
