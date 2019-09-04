@@ -3,8 +3,9 @@
 Mat img;
 
 
-
-
+extern  int processWidth;
+extern  int processHigth;
+unsigned char showFlag=0;	//确定显示图片的标识符
 /************************************************************************
 * 显示装备合成图
 
@@ -12,8 +13,9 @@ Mat img;
 void showPictureEquipment()
 {
 	img=imread("..\\photo.png");
-	resize(img, img, Size(SIZEH, SIZEW), 0, 0, INTER_LINEAR);
+	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
+	showFlag = SHOWEQUIPMENT;
 }
 
 /************************************************************************
@@ -23,8 +25,9 @@ void showPictureEquipment()
 void showPicturelingfeng()
 {
 	img = imread("..\\灵风.jpg");
-	resize(img, img, Size(SIZEH, SIZEW), 0, 0, INTER_LINEAR);
+	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
+	showFlag = SHOWLINGFENG;
 }
 
 
@@ -35,8 +38,9 @@ void showPicturelingfeng()
 void showNewPlayOne()
 {
 	img = imread("..\\one.jpg");
-	resize(img, img, Size(SIZEH, SIZEW), 0, 0, INTER_LINEAR);
+	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
+	showFlag = SHOWNEWPLAYONE;
 }
 
 /************************************************************************
@@ -46,8 +50,9 @@ void showNewPlayOne()
 void showNewPlayTwo()
 {
 	img = imread("..\\two.jpg");
-	resize(img, img, Size(SIZEH, SIZEW), 0, 0, INTER_LINEAR);
+	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
+	showFlag = SHOWPLAYTWO;
 }
 
 /************************************************************************
@@ -57,15 +62,45 @@ void showNewPlayTwo()
 void showChampionDropRates()
 {
 	img = imread("..\\championDropRates.jpg");
-	resize(img, img, Size(SIZEH, SIZEW), 0, 0, INTER_LINEAR);
+	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
+	showFlag = SHOWCHAMPIONDROPRATES;
+}
+
+/************************************************************************
+* 重置显示图片大小
+
+************************************************************************/
+void resizePicture()
+{
+	switch (showFlag)
+	{
+	case SHOWEQUIPMENT:
+		showPictureEquipment();
+		break;
+	case SHOWLINGFENG:
+		showPicturelingfeng();
+		break;
+	case SHOWNEWPLAYONE:
+		showNewPlayOne();
+		break;
+	case SHOWPLAYTWO:
+		showNewPlayTwo();
+		break;
+	case SHOWCHAMPIONDROPRATES:
+		showChampionDropRates();
+		break;
+	default:
+		break;
+	}
 }
 
 
 
+/************************************************************************
+* 获得线程id
 
-
-
+************************************************************************/
 int getThreadID(int pid)
 {
 	THREADENTRY32 te32;
@@ -88,6 +123,11 @@ int getThreadID(int pid)
 	return 0;
 }
 
+
+/************************************************************************
+* 显示进程id
+
+************************************************************************/
 int getPID(char *target)
 {
 	PROCESSENTRY32 pe32;

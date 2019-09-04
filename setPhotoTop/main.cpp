@@ -69,7 +69,30 @@ LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam)
 
 
 
-
+LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
+{
+	MOUSEHOOKSTRUCTEX* wheelData = (MOUSEHOOKSTRUCTEX*)lParam;
+	if (nCode < 0)
+	{
+		return ::CallNextHookEx(mouseHook, nCode, wParam, lParam);
+	}
+	if (wParam == WM_MOUSEWHEEL || wParam == WM_MBUTTONUP)
+	{
+		if (wheelData->mouseData == (WHEEL_DELTA << 16))   //up
+		{
+			processHigth += 10;
+			processWidth += 10;
+			resizePicture();
+		}
+		else if (wheelData->mouseData == -(WHEEL_DELTA << 16))		//down
+		{
+			processHigth -= 10;
+			processWidth -= 10;
+			resizePicture();
+		}
+	}
+	return CallNextHookEx(mouseHook, nCode, wParam, lParam);
+}
 
 
 int main(void)
@@ -82,7 +105,7 @@ int main(void)
 
 	if (hq == 0)
 	{
-		MessageBox(NULL, "true", "remain", MB_OK);
+		MessageBox(NULL, "no show", "remain", MB_OK);
 		return 0;
 	}
 
@@ -108,6 +131,14 @@ int main(void)
 		instance,                  // 当前实例句柄
 		threadId                  // 监听窗口句柄(NULL为全局监听)
 		);
+
+	keybordHook = SetWindowsHookEx(						//安装鼠标hook
+		WH_MOUSE,    
+		MouseProc,      
+		instance,                  
+		threadId                 
+		);
+
 
 	while (1)
 	{

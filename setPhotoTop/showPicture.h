@@ -14,7 +14,14 @@ using namespace cv;
 #define SIZEH  (250)
 #define SIZEW  (250)
 
-
+typedef enum 
+{
+	SHOWEQUIPMENT=0,
+	SHOWLINGFENG,
+	SHOWCHAMPIONDROPRATES,
+	SHOWNEWPLAYONE,
+	SHOWPLAYTWO
+}showPictureType;
 
 
 void showPictureEquipment();
@@ -22,6 +29,7 @@ void showPicturelingfeng();
 void showNewPlayOne();
 void showNewPlayTwo();
 void showChampionDropRates();
+void resizePicture();
 int getThreadID(int pid);
 int getPID(char *target);
 
