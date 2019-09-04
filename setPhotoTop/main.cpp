@@ -84,7 +84,7 @@ LRESULT CALLBACK MouseProc(int nCode, WPARAM wParam, LPARAM lParam)
 			processWidth += 10;
 			resizePicture();
 		}
-		else if (wheelData->mouseData == -(WHEEL_DELTA << 16))		//down
+		else if (wheelData->mouseData == (-WHEEL_DELTA << 16))		//down   wheelData为unsinged char 转为int，即与-WHEEL_DELTA << 16)相等
 		{
 			processHigth -= 10;
 			processWidth -= 10;
