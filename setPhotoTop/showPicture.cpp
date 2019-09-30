@@ -12,7 +12,7 @@ unsigned char showFlag=0;	//确定显示图片的标识符
 ************************************************************************/
 void showPictureEquipment()
 {
-	img=imread("..\\photo.png");
+	img=imread("..\\photo.jpg");
 	resize(img, img, Size(processHigth, processWidth), 0, 0, INTER_LINEAR);
 	imshow("show", img);
 	showFlag = SHOWEQUIPMENT;
